@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "source": "《2025年国民经济和社会发展统计公报》《2026年前三季度国民经济运行情况》",
+    "updatedAt": "2026-10-20"
+  },
+  "gdpQuarterly2026": [
+    { "quarter": "一季度", "growth": 5.0 },
+    { "quarter": "二季度", "growth": 4.3 },
+    { "quarter": "三季度", "growth": 4.5 }
+  ],
+  "industry2026Q1to3": [
+    { "name": "第一产业", "value": 3.5 },
+    { "name": "第二产业", "value": 4.2 },
+    { "name": "第三产业", "value": 4.8 }
+  ]
+}
