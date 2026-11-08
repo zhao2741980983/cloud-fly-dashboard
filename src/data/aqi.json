@@ -1,0 +1,14 @@
+[
+  {
+    "city": "beijing",
+    "aqi": 24
+  },
+  {
+    "city": "shanghai",
+    "aqi": 72
+  },
+  {
+    "city": "guangzhou",
+    "aqi": null
+  }
+]
