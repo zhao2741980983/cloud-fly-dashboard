@@ -2,14 +2,16 @@
 import StatCard from '../components/StatCard.vue'
 import LineChart from '../components/LineChart.vue'
 import BarChart from '../components/BarChart.vue'
-
 import { ref, onMounted } from 'vue'
 import { getNationalData, type NationalData } from '../api/national'
+import { getAqiData, type AqiRecord } from '../api/aqi'
 
 /*national 从 null 变成有数据，v-if="national" 成立，图表就显示*/
 const national = ref<NationalData | null>(null)
+const aqi = ref<AqiRecord[]>([])
 onMounted(async () => {
   national.value = await getNationalData()
+  aqi.value = await getAqiData()
 })
 
 const stats = [
@@ -48,7 +50,13 @@ const stats = [
         :categories="national.provinceGdp2026Q1to3.map((d) => d.name)"
         :values="national.provinceGdp2026Q1to3.map((d) => d.value)"
       />
+      <BarChart
+        title="三城市空气质量指数（AQI）"
+        :categories="aqi.filter((d) => d.aqi !== null).map((d) => d.city)"
+        :values="aqi.filter((d) => d.aqi !== null).map((d) => d.aqi)"
+      />
     </section>
+    <p class="source">空气质量数据来源:World Air Quality Index (WAQI)</p>
   </main>
 </template>
 

@@ -15,6 +15,7 @@ const props = defineProps<{
   categories: string[]
   values: number[]
   unit?: string
+  height?: string
 }>()
 
 /*computed 的意思是"依赖的数据变了，这里的结果自动更新"。props 变化时，图表会跟着变*/
@@ -57,5 +58,5 @@ const option = computed(() => ({
 </script>
 
 <template>
-  <VChart :option="option" autoresize style="height: 720px" />
+  <VChart :option="option" autoresize :style="{ height: height ?? '320px' }" />
 </template>
