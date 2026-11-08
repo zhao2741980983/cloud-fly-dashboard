@@ -23,6 +23,13 @@ const option = computed(() => ({
     xAxis / yAxis：坐标轴。type 决定轴的类型（value 数值轴、category 分类轴）。
     series：数据系列，是数组。type 决定图表类型，data 是数值。 
 */
+  grid: {
+    left: 80,
+    right: 40,
+    top: 50,
+    bottom: 30,
+  },
+
   xAxis: {
     type: 'value',
     axisLabel: { color: '#8fa3bf' },
@@ -50,5 +57,5 @@ const option = computed(() => ({
 </script>
 
 <template>
-  <VChart :option="option" autoresize style="height: 320px" />
+  <VChart :option="option" autoresize style="height: 720px" />
 </template>

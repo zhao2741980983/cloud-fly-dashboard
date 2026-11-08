@@ -29,15 +29,15 @@ const stats = [
 
     <section class="charts">
       <LineChart
-        title="2026 年各季度 GDP 同比增速"
+        title="各省份 2026 年 1—9 月地区生产总值（亿元）"
         :categories="national.gdpQuarterly2026.map((d) => d.quarter)"
         :values="national.gdpQuarterly2026.map((d) => d.growth)"
         unit="%"
       />
       <BarChart
-        title="各省份 2025 年 GDP"
-        :categories="national.provinceGdp2025.map((d) => d.name)"
-        :values="national.provinceGdp2025.map((d) => d.value)"
+        title="各省份 2026 年 GDP"
+        :categories="national.provinceGdp2026Q1to3.map((d) => d.name)"
+        :values="national.provinceGdp2026Q1to3.map((d) => d.value)"
       />
     </section>
   </main>
