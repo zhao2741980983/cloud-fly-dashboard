@@ -19,9 +19,29 @@ const props = defineProps<{
 
 /*computed 的意思是"依赖的数据变了，这里的结果自动更新"。props 变化时，图表会跟着变*/
 const option = computed(() => ({
-  xAxis: { type: 'category', data: props.categories },
-  yAxis: { type: 'value' },
-  series: [{ type: 'line', data: props.values }],
+  xAxis: {
+    type: 'category',
+    data: props.categories,
+    axisLabel: { color: '#8fa3bf' },
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: { color: '#8fa3bf' },
+  },
+  series: [
+    {
+      type: 'line',
+      data: props.values,
+    },
+  ],
+  backgroundColor: 'transparent',
+  title: {
+    text: props.title,
+    textStyle: { color: '#fff', fontSize: 16 },
+  },
+  tooltip: {
+    trigger: 'axis',
+  },
 }))
 </script>
 

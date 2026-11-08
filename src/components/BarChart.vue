@@ -23,9 +23,29 @@ const option = computed(() => ({
     xAxis / yAxis：坐标轴。type 决定轴的类型（value 数值轴、category 分类轴）。
     series：数据系列，是数组。type 决定图表类型，data 是数值。 
 */
-  xAxis: { type: 'value' },
-  yAxis: { type: 'category', data: props.categories },
-  series: [{ type: 'bar', data: props.values }],
+  xAxis: {
+    type: 'value',
+    axisLabel: { color: '#8fa3bf' },
+  },
+  yAxis: {
+    type: 'category',
+    data: props.categories,
+    axisLabel: { color: '#8fa3bf' },
+  },
+  series: [
+    {
+      type: 'bar',
+      data: props.values,
+    },
+  ],
+  backgroundColor: 'transparent',
+  title: {
+    text: props.title,
+    textStyle: { color: '#fff', fontSize: 16 },
+  },
+  tooltip: {
+    trigger: 'axis',
+  },
 }))
 </script>
 
