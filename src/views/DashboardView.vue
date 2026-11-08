@@ -6,6 +6,7 @@ import BarChart from '../components/BarChart.vue'
 import { ref, onMounted } from 'vue'
 import { getNationalData, type NationalData } from '../api/national'
 
+/*national 从 null 变成有数据，v-if="national" 成立，图表就显示*/
 const national = ref<NationalData | null>(null)
 onMounted(async () => {
   national.value = await getNationalData()
