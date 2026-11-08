@@ -49,11 +49,13 @@ const stats = [
         title="各省份 2026 年 1—9 月地区生产总值（亿元）"
         :categories="national.provinceGdp2026Q1to3.map((d) => d.name)"
         :values="national.provinceGdp2026Q1to3.map((d) => d.value)"
+        height="1000px"
       />
       <BarChart
         title="三城市空气质量指数（AQI）"
         :categories="aqi.filter((d) => d.aqi !== null).map((d) => d.city)"
         :values="aqi.filter((d) => d.aqi !== null).map((d) => d.aqi)"
+        height="150px"
       />
     </section>
     <p class="source">空气质量数据来源:World Air Quality Index (WAQI)</p>
