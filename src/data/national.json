@@ -12,5 +12,12 @@
     { "name": "第一产业", "value": 3.5 },
     { "name": "第二产业", "value": 4.2 },
     { "name": "第三产业", "value": 4.8 }
+  ],
+  "provinceGdp2025": [
+    { "name": "广东", "value": 145800 },
+    { "name": "江苏", "value": 140000 },
+    { "name": "山东", "value": 100000 },
+    { "name": "浙江", "value": 94500 },
+    { "name": "四川", "value": 67665.3 }
   ]
 }

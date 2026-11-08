@@ -2,6 +2,7 @@
 import StatCard from '../components/StatCard.vue'
 import LineChart from '../components/LineChart.vue'
 import national from '../data/national.json'
+import BarChart from '../components/BarChart.vue'
 const stats = [
   { title: '2025 年末全国人口', value: 140489, unit: '万人' },
   { title: '2025 年国内生产总值', value: 140.19, unit: '万亿元' },
@@ -32,6 +33,11 @@ const stats = [
         :categories="national.gdpQuarterly2026.map((d) => d.quarter)"
         :values="national.gdpQuarterly2026.map((d) => d.growth)"
         unit="%"
+      />
+      <BarChart
+        title="各省份 2025 年 GDP"
+        :categories="national.provinceGdp2025.map((d) => d.name)"
+        :values="national.provinceGdp2025.map((d) => d.value)"
       />
     </section>
   </main>

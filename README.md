@@ -1,53 +1,51 @@
 # cloud-fly-dashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+练习项目-云资源数据可视化大屏
 
-## Recommended IDE Setup
+## 开发工具、开发环境
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+通过使用[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)进行编写
 
-## Recommended Browser Setup
+## 技术栈
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Vue 3、TypeScript、Vite、ECharts
 
-## Type Support for `.vue` Imports in TS
+## 数据来源
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+[国家统计局](https://www.stats.gov.cn/)  
+江苏、山东的省级 GDP 为近似值，以统计局公报为准。
 
-## Customize configuration
+## 项目结构
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- `components`：通用组件（统计卡片、图表）
+- `views`：前端页面
+- `data`：数据文件（静态 JSON）
 
-## Project Setup
+## 项目配置
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 开发环境编译，启动项目
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 生产环境类型检查、编译与压缩
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 使用 [Vitest](https://vitest.dev/)运行单元测试
 
 ```sh
 npm run test:unit
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### 使用 [ESLint](https://eslint.org/)进行代码检查
 
 ```sh
 npm run lint
