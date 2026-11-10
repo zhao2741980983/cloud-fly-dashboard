@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import StatCard from '../components/StatCard.vue'
-import LineChart from '../components/LineChart.vue'
-import BarChart from '../components/BarChart.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import { getNationalData, type NationalData } from '../api/national'
 import { getAqiData, type AqiRecord } from '../api/aqi'
+const LineChart = defineAsyncComponent(() => import('../components/LineChart.vue'))
+const BarChart = defineAsyncComponent(() => import('../components/BarChart.vue'))
 
 /*national 从 null 变成有数据，v-if="national" 成立，图表就显示*/
 const national = ref<NationalData | null>(null)
