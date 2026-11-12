@@ -1,62 +1,137 @@
 <script setup lang="ts">
 import VChart from 'vue-echarts'
+import { computed } from 'vue'
 import { use } from 'echarts/core'
 import { BarChart } from 'echarts/charts'
-import { GridComponent, TooltipComponent, TitleComponent } from 'echarts/components'
+import { GridComponent, TooltipComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
+import { CHART, axisLabel, tooltipStyle, verticalGradient } from '../charts/theme'
 
-use([BarChart, GridComponent, TooltipComponent, TitleComponent, CanvasRenderer])
-/*ECharts 按需加载，没注册的功能不能用。这样能减小打包体积，也是性能优化的一个例子
-VChart 是 Vue 组件，LineChart 是折线图，GridComponent 是网格组件，TooltipComponent 是提示框组件，TitleComponent 是标题组件，CanvasRenderer 是渲染器。*/
-import { computed } from 'vue'
+use([BarChart, GridComponent, TooltipComponent, CanvasRenderer])
 
 const props = defineProps<{
   title: string
+  subtitle?: string
   categories: string[]
   values: number[]
   unit?: string
   height?: string
+  /** 条形宽度（少量数据时可以加宽，像 macOS 健康 App 的胶囊条） */
+  barWidth?: number
+  /** 是否在条形末端显示数值 */
+  showLabels?: boolean
 }>()
 
-/*computed 的意思是"依赖的数据变了，这里的结果自动更新"。props 变化时，图表会跟着变*/
-const option = computed(() => ({
-  /*
-    xAxis / yAxis：坐标轴。type 决定轴的类型（value 数值轴、category 分类轴）。
-    series：数据系列，是数组。type 决定图表类型，data 是数值。 
-*/
-  grid: {
-    left: 80,
-    right: 40,
-    top: 50,
-    bottom: 30,
-  },
+const emit = defineEmits<{ rendered: [] }>()
 
-  xAxis: {
-    type: 'value',
-    axisLabel: { color: '#8fa3bf' },
-  },
-  yAxis: {
-    type: 'category',
-    data: props.categories,
-    axisLabel: { color: '#8fa3bf' },
-  },
-  series: [
-    {
-      type: 'bar',
-      data: props.values,
+/* 单一系统蓝 + 上浅下深的光泽渐变，不放彩虹色，靠圆角与高光出质感 */
+const options = computed(() => {
+  const barWidth = props.barWidth ?? 14
+  return {
+    grid: { left: 12, right: props.showLabels ? 52 : 28, top: 12, bottom: 12, containLabel: true },
+    xAxis: {
+      type: 'value',
+      splitLine: { lineStyle: { color: CHART.splitLineColor } },
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel,
     },
-  ],
-  backgroundColor: 'transparent',
-  title: {
-    text: props.title,
-    textStyle: { color: '#fff', fontSize: 16 },
-  },
-  tooltip: {
-    trigger: 'axis',
-  },
-}))
+    yAxis: {
+      type: 'category',
+      data: props.categories,
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: { ...axisLabel, margin: 14 },
+    },
+    series: [
+      {
+        type: 'bar',
+        data: props.values,
+        barMaxWidth: barWidth,
+        itemStyle: {
+          borderRadius: barWidth / 2,
+          color: verticalGradient('#48a3ff', CHART.accent),
+          shadowColor: 'rgba(10, 132, 255, 0.35)',
+          shadowBlur: 10,
+          shadowOffsetY: 2,
+        },
+        label: {
+          show: props.showLabels ?? false,
+          position: 'right',
+          distance: 10,
+          color: CHART.labelColor,
+          fontSize: 12,
+          formatter: (p: { value: number }) => `${p.value}${props.unit ?? ''}`,
+        },
+        emphasis: { itemStyle: { color: verticalGradient('#7cc0ff', '#2b95ff') } },
+      },
+    ],
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(255,255,255,0.04)' } },
+      valueFormatter: (value: number) => `${value}${props.unit ?? ''}`,
+      ...tooltipStyle,
+    },
+    /* 让 echarts 自动生成无障碍描述，读屏软件可以读到图表内容摘要 */
+    aria: { enabled: true },
+    animationDuration: 700,
+    animationEasing: 'cubicOut' as const,
+    backgroundColor: 'transparent',
+  }
+})
 </script>
 
 <template>
-  <VChart :option="option" autoresize :style="{ height: height ?? '320px' }" />
+  <section class="panel glass">
+    <header class="panel-head">
+      <div>
+        <h2 class="panel-title">{{ title }}</h2>
+        <p v-if="subtitle" class="panel-sub">{{ subtitle }}</p>
+      </div>
+    </header>
+    <div class="panel-body">
+      <VChart
+        :option="options"
+        autoresize
+        :style="{ height: height ?? '320px' }"
+        @rendered="emit('rendered')"
+      />
+    </div>
+  </section>
 </template>
+
+<style scoped>
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 12px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px 8px 4px;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--label-primary);
+}
+
+.panel-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--label-tertiary);
+  letter-spacing: 0.01em;
+}
+
+.panel-body {
+  flex: 1;
+  min-height: 0;
+}
+</style>

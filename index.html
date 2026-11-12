@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="云资源数据可视化大屏：展示国家统计局 GDP 与空气质量数据" />
+    <meta name="theme-color" content="#121216" />
+    <title>云资源数据可视化大屏</title>
+    <style>
+      /* 首屏底色：脚本加载完成前也是深空灰，避免白屏闪一下 */
+      html,
+      body {
+        margin: 0;
+        background-color: #121216;
+        color: #f5f5f7;
+      }
+      /* 脚本尚未加载时的启动动画，Vue 挂载后会被自动替换掉 */
+      .boot-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        min-height: 100vh;
+        color: rgba(235, 235, 245, 0.64);
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI',
+          'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+      .boot-spinner {
+        width: 34px;
+        height: 34px;
+        border: 2.5px solid rgba(235, 235, 245, 0.14);
+        border-top-color: #0a84ff;
+        border-radius: 50%;
+        animation: boot-spin 0.9s cubic-bezier(0.5, 0.15, 0.5, 0.85) infinite;
+      }
+      @keyframes boot-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot-spinner {
+          animation-duration: 2.4s;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="boot-loading" role="status" aria-live="polite">
+        <span class="boot-spinner"></span>
+        <span>正在加载大屏…</span>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
