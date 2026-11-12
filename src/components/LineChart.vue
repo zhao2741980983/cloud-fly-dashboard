@@ -17,6 +17,9 @@ const props = defineProps<{
   unit?: string
 }>()
 
+/* 图表完成首帧绘后通知父组件，用于收起加载动画 */
+const emit = defineEmits<{ rendered: [] }>()
+
 /*computed 的意思是"依赖的数据变了，这里的结果自动更新"。props 变化时，图表会跟着变*/
 const option = computed(() => ({
   xAxis: {
@@ -46,5 +49,5 @@ const option = computed(() => ({
 </script>
 
 <template>
-  <VChart :option="option" autoresize style="height: 320px" />
+  <VChart :option="option" autoresize style="height: 320px" @rendered="emit('rendered')" />
 </template>

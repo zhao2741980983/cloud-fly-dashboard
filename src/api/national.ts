@@ -1,19 +1,12 @@
 import national from '../data/national.json'
+import { fetchApi } from './client'
 
 export type NationalData = typeof national
 
-export async function getNationalData(): Promise<NationalData> {
-  try {
-    /**
-     * fetch向后端发起请求，${import.meta.env.VITE_API_BASE}
-     * 会自动替换成 .env.development 里配置的 http://localhost:8080
-     * 故访问地址为http://localhost:8080/api/national
-     */
-    const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/national`)
-    if (!response.ok) throw new Error('national请求失败')
-    //response.json()异步获取，将数据返回为json对象。原response.json()为any类型
-    return (await response.json()) as NationalData
-  } catch {
-    return national
-  }
+export function getNationalData(): Promise<NationalData> {
+  /**
+   * 配置了 VITE_API_BASE 时请求 `${VITE_API_BASE}/api/national`；
+   * 未配置（线上 GitHub Pages）时直接返回本地 JSON，不再发起请求。
+   */
+  return fetchApi<NationalData>('/api/national', national)
 }
