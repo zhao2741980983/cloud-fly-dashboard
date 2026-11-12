@@ -75,13 +75,8 @@ const validAqi = computed(() => aqi.value.filter((d) => d.aqi !== null))
     <!-- 加载动画：固定在视口中央，数据请求 + 图表代码下载 + 首帧绘制期间一直显示 -->
     <LoadingSpinner v-if="!chartsPainted" class="page-loading" text="大屏数据加载中…" />
 
-    <!-- 仿 macOS 窗口标题栏：红黄绿三个交通灯 + 标题 + 状态胶囊 -->
+    <!-- 仿 macOS 窗口标题栏：标题 + 状态胶囊 -->
     <header class="window-bar glass">
-      <div class="traffic" aria-hidden="true">
-        <span class="dot dot-close"></span>
-        <span class="dot dot-min"></span>
-        <span class="dot dot-zoom"></span>
-      </div>
       <div class="window-title">
         <h1>云资源数据可视化大屏</h1>
         <p class="window-sub">国家统计局 · 2026 年前三季度</p>
@@ -168,32 +163,9 @@ const validAqi = computed(() => aqi.value.filter((d) => d.aqi !== null))
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 14px 18px;
+  padding: 16px 22px;
   border-radius: var(--radius-lg);
   margin-bottom: 18px;
-}
-
-.traffic {
-  display: flex;
-  gap: 8px;
-  flex: none;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.25);
-}
-
-.dot-close {
-  background: #ff5f57;
-}
-.dot-min {
-  background: #febc2e;
-}
-.dot-zoom {
-  background: #28c840;
 }
 
 .window-title {
