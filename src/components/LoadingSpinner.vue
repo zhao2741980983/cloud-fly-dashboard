@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * 通用加载提示：转圈 + 文案
+ * 通用加载提示：系统蓝转圈 + 文案
  * 用 min-height 占位，避免数据到达前后布局跳动
  */
 withDefaults(
@@ -8,7 +8,7 @@ withDefaults(
     text?: string
     minHeight?: string
   }>(),
-  { text: '数据加载中…', minHeight: '240px' },
+  { text: '正在加载…', minHeight: '240px' },
 )
 </script>
 
@@ -27,33 +27,26 @@ withDefaults(
   justify-content: center;
   gap: 14px;
   width: 100%;
-  color: #8fa3bf;
+  color: var(--label-secondary);
 }
 
 .spinner {
-  width: 38px;
-  height: 38px;
-  border: 3px solid rgba(143, 163, 191, 0.25);
-  border-top-color: #4a90e2;
+  width: 34px;
+  height: 34px;
+  border: 2.5px solid rgba(235, 235, 245, 0.14);
+  border-top-color: var(--accent);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.9s cubic-bezier(0.5, 0.15, 0.5, 0.85) infinite;
 }
 
 .loading-text {
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
 }
 
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* 尊重系统"减少动态效果"设置 */
-@media (prefers-reduced-motion: reduce) {
-  .spinner {
-    animation-duration: 2.4s;
   }
 }
 </style>

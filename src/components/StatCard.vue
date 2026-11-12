@@ -1,6 +1,5 @@
 <script setup lang="ts">
 //接受父组件传参(三个)
-
 defineProps<{
   title: string //卡片标题
   value: string | number //显示数值(数字/文字)
@@ -9,40 +8,55 @@ defineProps<{
 </script>
 
 <template>
-  <div class="stat-card">
-    <!-- 这里显示 defineProps 中的 title -->
-    <p class="stat-title">{{ title }}</p>
+  <article class="stat-card glass">
+    <p class="stat-label">{{ title }}</p>
     <p class="stat-value">
+      <span class="stat-number">{{ value }}</span>
       <!--v-if 是条件判断，意思是"只有 unit 有值的时候才显示这个 span"-->
-      {{ value }}<span class="stat-unit" v-if="unit">{{ unit }}</span>
+      <span class="stat-unit" v-if="unit">{{ unit }}</span>
     </p>
-  </div>
+  </article>
 </template>
 
 <style scoped>
-/* 统计卡片样式;scoped只影响当前组件 */
 .stat-card {
-  background-color: #13203a;
-  border: 1px solid #1e3a5f;
-  border-radius: 8px;
-  padding: 16px 20px;
+  padding: 18px 20px 16px;
 }
-.stat-title {
+
+.stat-label {
   margin: 0;
-  color: #8fa3bf;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--label-secondary);
 }
 
 .stat-value {
-  margin: 8px 0 0;
-  color: #fff;
-  font-size: 28px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 10px 0 0;
+}
+
+/* 数字用等宽数字（tabular-nums），跳动时不会左右抖动，向 macOS 控制中心看齐 */
+.stat-number {
+  font-size: 30px;
   font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--label-primary);
 }
 
 .stat-unit {
-  margin-left: 4px;
-  font-size: 14px;
-  color: #8fa3bf;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--label-tertiary);
+}
+
+@media (max-width: 640px) {
+  .stat-number {
+    font-size: 26px;
+  }
 }
 </style>

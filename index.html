@@ -5,15 +5,15 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="云资源数据可视化大屏：展示国家统计局 GDP 与空气质量数据" />
-    <meta name="theme-color" content="#0b1424" />
+    <meta name="theme-color" content="#121216" />
     <title>云资源数据可视化大屏</title>
     <style>
-      /* 首屏底色：脚本加载完成前也是深色，避免白屏闪一下 */
+      /* 首屏底色：脚本加载完成前也是深空灰，避免白屏闪一下 */
       html,
       body {
         margin: 0;
-        background-color: #0b1424;
-        color: #fff;
+        background-color: #121216;
+        color: #f5f5f7;
       }
       /* 脚本尚未加载时的启动动画，Vue 挂载后会被自动替换掉 */
       .boot-loading {
@@ -23,23 +23,20 @@
         justify-content: center;
         gap: 14px;
         min-height: 100vh;
-        color: #8fa3bf;
+        color: rgba(235, 235, 245, 0.64);
         font-family:
-          system-ui,
-          -apple-system,
-          'Segoe UI',
-          'Microsoft YaHei',
-          sans-serif;
-        font-size: 14px;
-        letter-spacing: 1px;
+          -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI',
+          'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+        font-size: 13px;
+        letter-spacing: 0.02em;
       }
       .boot-spinner {
-        width: 38px;
-        height: 38px;
-        border: 3px solid rgba(143, 163, 191, 0.25);
-        border-top-color: #4a90e2;
+        width: 34px;
+        height: 34px;
+        border: 2.5px solid rgba(235, 235, 245, 0.14);
+        border-top-color: #0a84ff;
         border-radius: 50%;
-        animation: boot-spin 0.8s linear infinite;
+        animation: boot-spin 0.9s cubic-bezier(0.5, 0.15, 0.5, 0.85) infinite;
       }
       @keyframes boot-spin {
         to {
