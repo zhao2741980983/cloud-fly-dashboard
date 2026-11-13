@@ -30,6 +30,15 @@ Vue 3、TypeScript、Vite、ECharts
 - `views`：前端页面
 - `data`：数据文件（静态 JSON）
 
+## 后端
+
+数据接口由 Spring Boot 提供，仓库地址：<https://github.com/zhao2741980983/cloud-fly-backend>
+
+- `GET /api/aqi`：三城市空气质量数据
+- `GET /api/national`：国家统计数据
+
+线上环境通过 `.env.production` 中的 `VITE_API_BASE` 访问后端，本地开发通过 `.env.development` 指向 `http://localhost:8080`。
+
 ## 项目配置
 
 ```sh
